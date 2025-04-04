@@ -1,0 +1,42 @@
+version: 1.0.0
+type: plugin
+author: eft
+name: redis
+label:
+  en_US: Redis
+  ja_JP: Redis
+  zh_Hans: Redis
+  pt_BR: Redis
+description:
+  en_US: Redis tools plugin for Dify, provide Redis SET and GET functions, Redis Cluster mode is supported too.
+  ja_JP: Redis tools plugin for Dify, provide Redis SET and GET functions, Redis Cluster mode is supported too.
+  zh_Hans: 适用于 Dify 的 Redis 工具插件，提供 Redis SET 与 GET 功能，同时支持 Redis 单节点与集群模式。
+  pt_BR: Redis tools plugin for Dify, provide Redis SET and GET functions, Redis Cluster mode is supported too.
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+    endpoint:
+      enabled: true
+    app:
+      enabled: true
+    storage:
+      enabled: true
+      size: 1048576
+plugins:
+  tools:
+    - provider/redis-provider.yaml
+meta:
+  version: 1.0.0
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2025-04-03T00:22:00.7619378+08:00
+privacy: PRIVACY.md
+verified: false
