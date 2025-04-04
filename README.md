@@ -23,6 +23,7 @@ allowing the caching of model-generated data in Redis to reduce server load.
 ### Authorize
 
 Set up authorization, witch actually connects to the Redis server provided by the user.
+![Set up authorization](./_assets/set_up.png)
 
 #### Features
 
