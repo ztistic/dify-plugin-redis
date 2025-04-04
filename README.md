@@ -22,7 +22,7 @@ allowing the caching of model-generated data in Redis to reduce server load.
 
 ### Authorize
 
-Set up authorization, witch actually connects to the Redis server provided by the user.
+Set up authorization, which actually connects to the Redis server provided by user.
 ![Set up authorization](./_assets/set_up.png)
 
 #### Features
@@ -49,12 +49,12 @@ The Redis SET tool allows users write data into Redis.
 
 #### Parameters
 
-| Parameter | Type     | Required | Description                                                |
-|-----------|----------|----------|------------------------------------------------------------|
-| `name`    | `string` | `Yes`    | name of a redis record, part of the final redis key.       |
-| `key`     | `string` | `Yes`    | key of a redis record, part of the final redis key.        |
-| `value`   | `string` | `Yes`    | value of a redis record.                                   |
-| `ttl`     | `number` | `No`     | value of a redis record, default `60`s, `-1` is supported. |
+| Parameter | Type     | Required | Description                                              |
+|-----------|----------|----------|----------------------------------------------------------|
+| `name`    | `string` | `Yes`    | name of a redis record, part of the final redis key.     |
+| `key`     | `string` | `Yes`    | key of a redis record, part of the final redis key.      |
+| `value`   | `string` | `Yes`    | value of a redis record.                                 |
+| `ttl`     | `number` | `No`     | TTL of a redis record, default `60`s, `-1` is supported. |
 
 ### Redis GET
 
