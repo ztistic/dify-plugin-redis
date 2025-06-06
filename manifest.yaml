@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.0.1
 type: plugin
 author: eft
 name: redis
@@ -29,7 +29,7 @@ plugins:
   tools:
     - provider/redis-provider.yaml
 meta:
-  version: 1.0.0
+  version: 1.0.1
   arch:
     - amd64
     - arm64

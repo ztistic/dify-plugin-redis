@@ -1,3 +1,3 @@
-dify_plugin~=0.0.1b72
-redis-py-cluster
-redis
+dify_plugin~=0.0.1b76
+redis~=3.5.3
+redis-py-cluster~=2.1.3

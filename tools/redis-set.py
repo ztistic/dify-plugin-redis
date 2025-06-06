@@ -4,15 +4,15 @@ from typing import Any
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from utils.common_utils import get_redis_connection, default_if_empty
+from utils.redis_utils import get_redis_connection
 
 
 class RedisSetAction(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
-        name = default_if_empty(tool_parameters.get('name'))
-        key = default_if_empty(tool_parameters.get('key'))
-        value = default_if_empty(tool_parameters.get('value'))
-        ttl = int(default_if_empty(tool_parameters.get('ttl'), 60))
+        name = tool_parameters.get('name')
+        key = tool_parameters.get('key')
+        value = tool_parameters.get('value')
+        ttl = int(tool_parameters.get('ttl') or 60)
 
         if name and key and value:
             redis_key = name + ':' + key
