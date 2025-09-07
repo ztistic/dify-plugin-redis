@@ -31,12 +31,13 @@ Set up authorization, which actually connects to the Redis server provided by us
 
 #### Parameters
 
-| Parameter  | Type     | Required | Description                             |
-|------------|----------|----------|-----------------------------------------|
-| `host`     | `string` | `No`     | redis server host, default `127.0.0.1`. |
-| `port`     | `number` | `No`     | redis server port, default `6379`.      |
-| `password` | `string` | `No`     | redis server password, default `None`.  |
-| `cluster`  | `bool`   | `No`     | redis cluster or not, default `False`.  |
+| Parameter  | Type     | Required | Description                                           |
+|------------|----------|----------|-------------------------------------------------------|
+| `host`     | `string` | `No`     | redis server host, default `127.0.0.1`.               |
+| `port`     | `number` | `No`     | redis server port, default `6379`.                    |
+| `password` | `string` | `No`     | redis server password, default `None`.                |
+| `cluster`  | `bool`   | `No`     | redis cluster or not, default `False`.                |
+| `db`       | `number` | `No`     | redis db, not supported in cluster mode, default `0`. |
 
 ### Redis SET
 

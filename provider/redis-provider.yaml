@@ -47,6 +47,15 @@ credentials_for_provider:
     placeholder:
       en_US: 'default: false'
       zh_Hans: '默认: false'
+  db:
+    type: text-input
+    required: false
+    label:
+      en_US: DB
+      zh_Hans: DB
+    placeholder:
+      en_US: 'default: 0 (Not supported in cluster mode)'
+      zh_Hans: '默认: 0 (集群模式下不生效)'
 tools:
   - tools/redis-set.yaml
   - tools/redis-get.yaml

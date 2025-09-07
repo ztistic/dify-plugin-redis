@@ -6,6 +6,7 @@ from rediscluster import RedisCluster
 
 DEFAULT_HOST = '127.0.0.1'
 DEFAULT_PORT = 6379
+DEFAULT_DB = 0
 
 
 def get_redis_cluster(data: dict[str, Any]) -> RedisCluster:
@@ -23,6 +24,7 @@ def get_redis_single(data: dict[str, Any]) -> Redis:
     return redis.Redis(connection_pool=redis.ConnectionPool(
         host=data.get('host') or DEFAULT_HOST,
         port=int(data.get('port') or DEFAULT_PORT),
+        db=int(data.get('db') or DEFAULT_DB),
         password=data.get('password'),
         decode_responses=True
     ))
