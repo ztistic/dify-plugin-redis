@@ -171,6 +171,10 @@ cython_debug/
 .git/
 .gitignore
 
+.workbuddy/
+
+*.difypkg
+
 # Mac
 .DS_Store
 
