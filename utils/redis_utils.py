@@ -1,8 +1,8 @@
 from typing import Any
 
 import redis
-from redis.client import Redis
-from rediscluster import RedisCluster
+from redis import Redis
+from redis.cluster import ClusterNode, RedisCluster
 
 DEFAULT_HOST = '127.0.0.1'
 DEFAULT_PORT = 6379
@@ -11,12 +11,12 @@ DEFAULT_DB = 0
 
 def get_redis_cluster(data: dict[str, Any]) -> RedisCluster:
     return RedisCluster(
-        startup_nodes=[{
-            'host': data.get('host') or DEFAULT_HOST,
-            'port': int(data.get('port') or DEFAULT_PORT)
-        }],
+        startup_nodes=[ClusterNode(
+            data.get('host') or DEFAULT_HOST,
+            int(data.get('port') or DEFAULT_PORT),
+        )],
         password=data.get('password'),
-        decode_responses=True
+        decode_responses=True,
     )
 
 

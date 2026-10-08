@@ -48,6 +48,9 @@ class TestGetRedisCluster:
             redis_utils.get_redis_cluster({'host': 'h', 'port': '7000', 'password': 'p'})
             MockCluster.assert_called_once()
             kwargs = MockCluster.call_args.kwargs
-            assert kwargs['startup_nodes'] == [{'host': 'h', 'port': 7000}]
+            startup_nodes = kwargs['startup_nodes']
+            assert len(startup_nodes) == 1
+            assert startup_nodes[0].host == 'h'
+            assert startup_nodes[0].port == 7000
             assert kwargs['password'] == 'p'
             assert kwargs['decode_responses'] is True
