@@ -66,4 +66,4 @@ parameters:
     form: llm
 extra:
   python:
-    source: tools/redis-set.py
+    source: tools/redis_set.py

@@ -40,4 +40,4 @@ parameters:
     form: llm
 extra:
   python:
-    source: tools/redis-get.py
+    source: tools/redis_get.py
