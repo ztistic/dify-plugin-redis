@@ -180,6 +180,10 @@ cython_debug/
 tests/
 requirements-dev.txt
 
+# Dify CLI binary (in case it is downloaded into the project dir)
+dify-plugin
+dify-plugin.exe
+
 # Mac
 .DS_Store
 
