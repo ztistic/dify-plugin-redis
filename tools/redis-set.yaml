@@ -4,13 +4,11 @@ identity:
   label:
     en_US: Redis SET
     zh_Hans: Redis SET
-    pt_BR: Redis SET
 description:
   human:
-    en_US: Redis SET
-    zh_Hans: Redis SET
-    pt_BR: Redis SET
-  llm: Redis SET
+    en_US: Store a value in Redis
+    zh_Hans: 向 Redis 写入一个值
+  llm: "Store a value in Redis to cache data (e.g. LLM output) for later retrieval with Redis GET. The full Redis key is formed as name:key."
 parameters:
   - name: 'name'
     type: string
@@ -18,12 +16,10 @@ parameters:
     label:
       en_US: 'Name'
       zh_Hans: 'Name'
-      pt_BR: 'Name'
     human_description:
-      en_US: 'Redis Name'
-      zh_Hans: 'Redis Name'
-      pt_BR: 'Redis Name'
-    llm_description: 'Redis Name'
+      en_US: 'Namespace (prefix) of the Redis key'
+      zh_Hans: 'Redis 键的命名空间（前缀）'
+    llm_description: "The namespace (prefix) of the Redis key. The full key is formed as name:key."
     form: llm
   - name: 'key'
     type: string
@@ -31,12 +27,10 @@ parameters:
     label:
       en_US: 'Key'
       zh_Hans: 'Key'
-      pt_BR: 'Key'
     human_description:
-      en_US: 'Redis Key'
-      zh_Hans: 'Redis Key'
-      pt_BR: 'Redis Key'
-    llm_description: 'Redis Key'
+      en_US: 'The key name within the namespace'
+      zh_Hans: '命名空间下的键名'
+    llm_description: "The key name within the namespace. The full key is formed as name:key."
     form: llm
   - name: 'value'
     type: string
@@ -44,12 +38,10 @@ parameters:
     label:
       en_US: 'Value'
       zh_Hans: 'Value'
-      pt_BR: 'Value'
     human_description:
-      en_US: 'Redis Value'
-      zh_Hans: 'Redis Value'
-      pt_BR: 'Redis Value'
-    llm_description: 'Redis Value'
+      en_US: 'The value to store'
+      zh_Hans: '要存储的值'
+    llm_description: "The value to store in Redis."
     form: llm
   - name: 'ttl'
     type: number
@@ -57,13 +49,11 @@ parameters:
     label:
       en_US: 'TTL'
       zh_Hans: 'TTL'
-      pt_BR: 'TTL'
     human_description:
-      en_US: 'TTL, default 60s'
-      zh_Hans: 'TTL, 默认 60 秒'
-      pt_BR: 'TTL, default 60s'
-    llm_description: 'TTL'
+      en_US: 'Time-to-live in seconds (default 60, -1 for no expiry)'
+      zh_Hans: '过期时间，单位秒（默认 60，-1 表示永不过期）'
+    llm_description: "Time-to-live in seconds. Default is 60. Use -1 for no expiry."
     form: llm
 extra:
   python:
-    source: tools/redis-set.py
+    source: tools/redis_set.py

@@ -175,3 +175,7 @@ cython_debug/
 
 # Vscode
 .vscode/
+
+.workbuddy/
+
+*.difypkg

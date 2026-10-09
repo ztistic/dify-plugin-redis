@@ -169,7 +169,16 @@ cython_debug/
 
 # Git
 .git/
+.github/
 .gitignore
+
+.workbuddy/
+
+*.difypkg
+
+# Tests and dev dependencies (not shipped in the package)
+tests/
+requirements-dev.txt
 
 # Mac
 .DS_Store
