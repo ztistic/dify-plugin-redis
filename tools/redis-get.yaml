@@ -4,13 +4,11 @@ identity:
   label:
     en_US: Redis GET
     zh_Hans: Redis GET
-    pt_BR: Redis GET
 description:
   human:
-    en_US: Redis GET
-    zh_Hans: Redis GET
-    pt_BR: Redis GET
-  llm: Redis GET
+    en_US: Read a value from Redis
+    zh_Hans: 从 Redis 读取一个值
+  llm: "Read a value from Redis. The full Redis key is formed as name:key. Returns an empty string if the key does not exist."
 parameters:
   - name: 'name'
     type: string
@@ -18,12 +16,10 @@ parameters:
     label:
       en_US: 'Name'
       zh_Hans: 'Name'
-      pt_BR: 'Name'
     human_description:
-      en_US: 'Redis Name'
-      zh_Hans: 'Redis Name'
-      pt_BR: 'Redis Name'
-    llm_description: 'Redis Name'
+      en_US: 'Namespace (prefix) of the Redis key'
+      zh_Hans: 'Redis 键的命名空间（前缀）'
+    llm_description: "The namespace (prefix) of the Redis key. The full key is formed as name:key."
     form: llm
   - name: 'key'
     type: string
@@ -31,12 +27,10 @@ parameters:
     label:
       en_US: 'Key'
       zh_Hans: 'Key'
-      pt_BR: 'Key'
     human_description:
-      en_US: 'Redis Key'
-      zh_Hans: 'Redis Key'
-      pt_BR: 'Redis Key'
-    llm_description: 'Redis Key'
+      en_US: 'The key name within the namespace'
+      zh_Hans: '命名空间下的键名'
+    llm_description: "The key name within the namespace. The full key is formed as name:key."
     form: llm
 extra:
   python:

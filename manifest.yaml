@@ -4,14 +4,10 @@ author: eft
 name: redis
 label:
   en_US: Redis
-  ja_JP: Redis
   zh_Hans: Redis
-  pt_BR: Redis
 description:
-  en_US: Redis tools plugin for Dify, provide Redis SET and GET functions, Redis Cluster mode is supported too.
-  ja_JP: Redis tools plugin for Dify, provide Redis SET and GET functions, Redis Cluster mode is supported too.
-  zh_Hans: 适用于 Dify 的 Redis 工具插件，提供 Redis SET 与 GET 功能，同时支持 Redis 单节点与集群模式。
-  pt_BR: Redis tools plugin for Dify, provide Redis SET and GET functions, Redis Cluster mode is supported too.
+  en_US: A Dify plugin that provides Redis SET and GET tools for caching data, with support for both standalone and cluster mode.
+  zh_Hans: 适用于 Dify 的 Redis 插件，提供 SET 与 GET 工具，用于缓存数据，支持单节点与集群模式。
 icon: icon.svg
 resource:
   memory: 268435456
