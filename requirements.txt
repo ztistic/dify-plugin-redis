@@ -1,2 +1,2 @@
-dify_plugin~=0.10.2
-redis~=8.1.0
+dify_plugin==0.10.2
+redis==8.1.0

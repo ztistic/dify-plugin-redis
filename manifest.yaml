@@ -2,6 +2,8 @@ version: 1.0.4
 type: plugin
 author: eft
 name: redis
+repo: https://github.com/ztistic/dify-plugin-redis
+contact: ztistic@outlook.com
 label:
   en_US: Redis
   zh_Hans: Redis
