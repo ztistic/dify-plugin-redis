@@ -26,6 +26,29 @@ jobs:
         run: |
           /tmp/dify-plugin plugin package . -o "dify-plugin-redis-${{ steps.meta.outputs.version }}.difypkg"
 
+      - name: Setup marketplace validator
+        run: |
+          git clone --depth 1 https://github.com/langgenius/dify-marketplace-toolkit.git /tmp/dify-marketplace-toolkit
+          mkdir -p "$HOME/.local/bin"
+          curl -sL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -o "$HOME/.local/bin/yq"
+          chmod +x "$HOME/.local/bin/yq"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          yq --version
+
+      - name: Validate package
+        run: |
+          python3 /tmp/dify-marketplace-toolkit/validator/validate-difypkg.py \
+            "dify-plugin-redis-${{ steps.meta.outputs.version }}.difypkg" \
+            --output-dir ./validation-report
+
+      - name: Upload validation report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: validation-report
+          path: validation-report
+          if-no-files-found: ignore
+
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
