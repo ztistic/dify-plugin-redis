@@ -6,6 +6,8 @@ on:
 jobs:
   package:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -26,6 +28,22 @@ jobs:
         run: |
           /tmp/dify-plugin plugin package . -o "dify-plugin-redis-${{ steps.meta.outputs.version }}.difypkg"
 
+      - name: Upload package
+        uses: actions/upload-artifact@v7
+        with:
+          path: "dify-plugin-redis-${{ steps.meta.outputs.version }}.difypkg"
+          archive: false
+          if-no-files-found: error
+
+  validate:
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download package
+        uses: actions/download-artifact@v8
+        with:
+          name: "dify-plugin-redis-${{ needs.package.outputs.version }}.difypkg"
+
       - name: Setup marketplace validator
         run: |
           git clone --depth 1 https://github.com/langgenius/dify-marketplace-toolkit.git /tmp/dify-marketplace-toolkit
@@ -38,7 +56,7 @@ jobs:
       - name: Validate package
         run: |
           python3 /tmp/dify-marketplace-toolkit/validator/validate-difypkg.py \
-            "dify-plugin-redis-${{ steps.meta.outputs.version }}.difypkg" \
+            "dify-plugin-redis-${{ needs.package.outputs.version }}.difypkg" \
             --output-dir ./validation-report
 
       - name: Upload validation summary
@@ -56,10 +74,3 @@ jobs:
           name: validation-report
           path: validation-report
           if-no-files-found: ignore
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v7
-        with:
-          path: "dify-plugin-redis-${{ steps.meta.outputs.version }}.difypkg"
-          archive: false
-          if-no-files-found: error
