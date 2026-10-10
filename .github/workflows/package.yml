@@ -41,6 +41,14 @@ jobs:
             "dify-plugin-redis-${{ steps.meta.outputs.version }}.difypkg" \
             --output-dir ./validation-report
 
+      - name: Upload validation summary
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          path: validation-report/summary.md
+          archive: false
+          if-no-files-found: ignore
+
       - name: Upload validation report
         if: always()
         uses: actions/upload-artifact@v7
