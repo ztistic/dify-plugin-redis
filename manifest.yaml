@@ -1,4 +1,4 @@
-version: 1.0.4
+version: 1.1.0
 type: plugin
 author: eft
 name: redis
@@ -8,8 +8,8 @@ label:
   en_US: Redis
   zh_Hans: Redis
 description:
-  en_US: A Dify plugin that provides Redis SET and GET tools for caching data, with support for both standalone and cluster mode.
-  zh_Hans: 适用于 Dify 的 Redis 插件，提供 SET 与 GET 工具，用于缓存数据，支持单节点与集群模式。
+  en_US: A Dify plugin that provides Redis SET, GET, DEL and EXISTS tools, with support for both standalone and cluster mode.
+  zh_Hans: 适用于 Dify 的 Redis 插件，提供 SET、GET、DEL 与 EXISTS 工具，支持单节点与集群模式。
 icon: icon.svg
 resource:
   memory: 268435456

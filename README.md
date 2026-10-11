@@ -2,13 +2,14 @@
 
 **Author:** [EFT](https://github.com/ztistic)
 **Repo:** [dify-plugin-redis](https://github.com/ztistic/dify-plugin-redis)
-**Version:** 1.0.4
+**Version:** 1.1.0
 **Type:** tool
 
 ## Description
 
-This Dify Redis plugin provides Redis SET and GET tools, allowing you to cache
-model-generated data in Redis to reduce server load and cost.
+This Dify Redis plugin provides Redis tools for caching and key management:
+raw-key tools (SET, GET, DEL, EXISTS) that use the key exactly as given,
+plus namespaced variants of SET and GET that form the key as `name:key`.
 
 ## Requirements
 
@@ -35,6 +36,42 @@ Configure the Redis connection in the plugin's authorization page:
 > Note: `port` and `db` are rendered as text inputs in Dify but should be numeric values. `db` is ignored in cluster mode.
 
 ## Tools
+
+### SET
+
+Write data into Redis using the full key as-is. Returns the input value on
+success, or raises an error.
+
+| Parameter | Type     | Required | Description                              |
+|-----------|----------|----------|------------------------------------------|
+| `key`     | `string` | `Yes`    | The full Redis key                       |
+| `value`   | `string` | `Yes`    | Value to store                           |
+| `ttl`     | `number` | `No`     | Time-to-live in seconds. Default: no expiry |
+
+### GET
+
+Read data from Redis using the full key as-is. Returns the stored value, or
+an empty string if the key does not exist.
+
+| Parameter | Type     | Required | Description        |
+|-----------|----------|----------|--------------------|
+| `key`     | `string` | `Yes`    | The full Redis key |
+
+### DEL
+
+Delete a Redis key. Returns the number of keys deleted (`0` or `1`).
+
+| Parameter | Type     | Required | Description        |
+|-----------|----------|----------|--------------------|
+| `key`     | `string` | `Yes`    | The full Redis key |
+
+### EXISTS
+
+Check whether a Redis key exists. Returns `true` or `false`.
+
+| Parameter | Type     | Required | Description        |
+|-----------|----------|----------|--------------------|
+| `key`     | `string` | `Yes`    | The full Redis key |
 
 ### SET (namespaced)
 

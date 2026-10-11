@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-10-11
+
+### Added
+
+- Raw-key tools operating on the full key as-is: `set`, `get`, `del`, `exists`
+
+### Changed
+
+- Labels of existing tools renamed to `SET (namespaced)` / `GET (namespaced)` (identities `redis-set` / `redis-get` unchanged)
+- Tool source files renamed: `set_namespaced.py` / `get_namespaced.py` / `delete.py`
+- TTL parsing moved to `utils/redis_utils.parse_ttl`; falsy TTL now falls back to each tool's own policy (namespaced SET defaults to 60, raw SET means no expiry)
+
 ## [1.0.4] - 2026-10-10
 
 ### Added
