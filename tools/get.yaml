@@ -1,0 +1,26 @@
+identity:
+  name: get
+  author: eft
+  label:
+    en_US: GET
+    zh_Hans: GET
+description:
+  human:
+    en_US: Get the value of a Redis key
+    zh_Hans: 获取 Redis 键的值
+  llm: "Get the value of a Redis key. The key is used exactly as given, no prefix is added. Returns an empty string if the key does not exist. For namespaced keys formed as name:key, use GET (namespaced) instead."
+parameters:
+  - name: 'key'
+    type: string
+    required: true
+    label:
+      en_US: 'Key'
+      zh_Hans: 'Key'
+    human_description:
+      en_US: 'The full Redis key'
+      zh_Hans: '完整的 Redis 键'
+    llm_description: "The full Redis key, used as-is."
+    form: llm
+extra:
+  python:
+    source: tools/get.py
