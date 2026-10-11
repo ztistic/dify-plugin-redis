@@ -26,12 +26,12 @@ jobs:
 
       - name: Package plugin
         run: |
-          /tmp/dify-plugin plugin package . -o "dify-plugin-redis-${{ steps.meta.outputs.version }}.difypkg"
+          /tmp/dify-plugin plugin package . -o "redis-${{ steps.meta.outputs.version }}.difypkg"
 
       - name: Upload package
         uses: actions/upload-artifact@v7
         with:
-          path: "dify-plugin-redis-${{ steps.meta.outputs.version }}.difypkg"
+          path: "redis-${{ steps.meta.outputs.version }}.difypkg"
           archive: false
           if-no-files-found: error
 
@@ -42,7 +42,7 @@ jobs:
       - name: Download package
         uses: actions/download-artifact@v8
         with:
-          name: "dify-plugin-redis-${{ needs.package.outputs.version }}.difypkg"
+          name: "redis-${{ needs.package.outputs.version }}.difypkg"
 
       - name: Setup marketplace validator
         run: |
@@ -56,7 +56,7 @@ jobs:
       - name: Validate package
         run: |
           python3 /tmp/dify-marketplace-toolkit/validator/validate-difypkg.py \
-            "dify-plugin-redis-${{ needs.package.outputs.version }}.difypkg" \
+            "redis-${{ needs.package.outputs.version }}.difypkg" \
             --output-dir ./validation-report
 
       - name: Upload validation summary
