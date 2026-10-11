@@ -5,23 +5,9 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.model import InvokeError
 
-from utils.redis_utils import get_redis_connection
+from utils.redis_utils import get_redis_connection, parse_ttl
 
-
-def _parse_ttl(ttl_raw: Any) -> int:
-    """Parse and validate the ttl parameter.
-
-    Returns the TTL in seconds. Accepts -1 (no expiry) or a positive integer.
-    Defaults to 60 when ttl is not provided.
-    """
-    ttl_raw = ttl_raw or 60
-    try:
-        ttl = int(ttl_raw)
-    except (TypeError, ValueError):
-        raise InvokeError(f'Invalid ttl: {ttl_raw}, must be an integer')
-    if ttl != -1 and ttl <= 0:
-        raise InvokeError(f'Invalid ttl: {ttl}, must be -1 or a positive integer')
-    return ttl
+DEFAULT_TTL = 60
 
 
 class RedisSetNamespacedAction(Tool):
@@ -33,7 +19,9 @@ class RedisSetNamespacedAction(Tool):
         if not name or not key or not value:
             raise InvokeError('Missing required parameters: name, key and value')
 
-        ttl = _parse_ttl(tool_parameters.get('ttl'))
+        ttl = parse_ttl(tool_parameters.get('ttl'))
+        if ttl is None:
+            ttl = DEFAULT_TTL
 
         try:
             redis_key = str(name) + ':' + str(key)

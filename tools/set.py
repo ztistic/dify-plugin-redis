@@ -5,8 +5,7 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.model import InvokeError
 
-from tools.set_namespaced import _parse_ttl
-from utils.redis_utils import get_redis_connection
+from utils.redis_utils import get_redis_connection, parse_ttl
 
 
 class RedisSetAction(Tool):
@@ -17,8 +16,7 @@ class RedisSetAction(Tool):
         if not key or not value:
             raise InvokeError('Missing required parameters: key and value')
 
-        ttl_raw = tool_parameters.get('ttl')
-        ttl = None if ttl_raw is None else _parse_ttl(ttl_raw)
+        ttl = parse_ttl(tool_parameters.get('ttl'))
         if ttl == -1:
             ttl = None
 
