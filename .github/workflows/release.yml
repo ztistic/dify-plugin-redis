@@ -1,0 +1,58 @@
+name: Release Plugin
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Dify Plugin CLI
+        run: |
+          curl -L -o /tmp/dify-plugin https://github.com/langgenius/dify-plugin-daemon/releases/latest/download/dify-plugin-linux-amd64
+          chmod +x /tmp/dify-plugin
+          /tmp/dify-plugin version
+
+      - name: Extract version
+        id: meta
+        run: |
+          VERSION=$(grep '^version:' manifest.yaml | awk '{print $2}')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Verify tag matches manifest version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          if [ "${GITHUB_REF_NAME}" != "${{ steps.meta.outputs.tag }}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match manifest version ${{ steps.meta.outputs.tag }}"
+            exit 1
+          fi
+
+      - name: Package plugin
+        run: |
+          /tmp/dify-plugin plugin package . -o "redis-${{ steps.meta.outputs.version }}.difypkg"
+
+      - name: Delete existing release if present
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete "${{ steps.meta.outputs.tag }}" --yes --cleanup-tag 2>/dev/null || true
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.meta.outputs.tag }}" \
+            "redis-${{ steps.meta.outputs.version }}.difypkg" \
+            --title "${{ steps.meta.outputs.tag }}" \
+            --target "${{ github.sha }}" \
+            --generate-notes
