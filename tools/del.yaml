@@ -23,4 +23,4 @@ parameters:
     form: llm
 extra:
   python:
-    source: tools/redis_del.py
+    source: tools/delete.py

@@ -6,7 +6,7 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.model import InvokeError
 from tools.get import RedisGetAction
 from tools.get_namespaced import RedisGetNamespacedAction
-from tools.redis_del import RedisDelAction
+from tools.delete import RedisDelAction
 from tools.set import RedisSetAction
 from tools.set_namespaced import RedisSetNamespacedAction
 
@@ -119,7 +119,7 @@ class TestRedisDelAction:
         tool = make_tool(RedisDelAction)
         conn = MagicMock()
         conn.delete.return_value = 1
-        with patch('tools.redis_del.get_redis_connection', return_value=conn):
+        with patch('tools.delete.get_redis_connection', return_value=conn):
             msgs = list(tool._invoke({'key': 'k'}))
         assert len(msgs) == 1
         conn.delete.assert_called_once_with('k')
@@ -130,7 +130,7 @@ class TestRedisDelAction:
         tool = make_tool(RedisDelAction)
         conn = MagicMock()
         conn.delete.return_value = 0
-        with patch('tools.redis_del.get_redis_connection', return_value=conn):
+        with patch('tools.delete.get_redis_connection', return_value=conn):
             msgs = list(tool._invoke({'key': 'k'}))
         text = getattr(msgs[0].message, 'text', msgs[0].message)
         assert text == '0'
