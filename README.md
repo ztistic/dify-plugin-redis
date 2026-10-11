@@ -36,7 +36,7 @@ Configure the Redis connection in the plugin's authorization page:
 
 ## Tools
 
-### Redis SET
+### SET (namespaced)
 
 Write data into Redis. Returns the input value on success, or raises an error.
 
@@ -49,7 +49,7 @@ Write data into Redis. Returns the input value on success, or raises an error.
 
 The final Redis key is `{name}:{key}`.
 
-### Redis GET
+### GET (namespaced)
 
 Read data from Redis. Returns the stored value, or an empty string if the key
 does not exist.

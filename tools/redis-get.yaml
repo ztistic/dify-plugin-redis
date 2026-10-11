@@ -2,8 +2,8 @@ identity:
   name: redis-get
   author: eft
   label:
-    en_US: Redis GET
-    zh_Hans: Redis GET
+    en_US: GET (namespaced)
+    zh_Hans: GET (namespaced)
 description:
   human:
     en_US: Read a value from Redis
@@ -34,4 +34,4 @@ parameters:
     form: llm
 extra:
   python:
-    source: tools/redis_get.py
+    source: tools/get_namespaced.py

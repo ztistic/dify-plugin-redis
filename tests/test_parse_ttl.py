@@ -1,7 +1,7 @@
 import pytest
 
 from dify_plugin.errors.model import InvokeError
-from tools.redis_set import _parse_ttl
+from tools.set_namespaced import _parse_ttl
 
 
 class TestParseTTL:

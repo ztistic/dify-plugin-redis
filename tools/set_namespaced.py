@@ -24,7 +24,7 @@ def _parse_ttl(ttl_raw: Any) -> int:
     return ttl
 
 
-class RedisSetAction(Tool):
+class RedisSetNamespacedAction(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         name = tool_parameters.get('name')
         key = tool_parameters.get('key')

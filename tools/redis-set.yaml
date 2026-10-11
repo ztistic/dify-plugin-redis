@@ -2,13 +2,13 @@ identity:
   name: redis-set
   author: eft
   label:
-    en_US: Redis SET
-    zh_Hans: Redis SET
+    en_US: SET (namespaced)
+    zh_Hans: SET (namespaced)
 description:
   human:
     en_US: Store a value in Redis
     zh_Hans: 向 Redis 写入一个值
-  llm: "Store a value in Redis to cache data (e.g. LLM output) for later retrieval with Redis GET. The full Redis key is formed as name:key."
+  llm: "Store a value in Redis to cache data (e.g. LLM output) for later retrieval with GET (namespaced). The full Redis key is formed as name:key."
 parameters:
   - name: 'name'
     type: string
@@ -56,4 +56,4 @@ parameters:
     form: llm
 extra:
   python:
-    source: tools/redis_set.py
+    source: tools/set_namespaced.py

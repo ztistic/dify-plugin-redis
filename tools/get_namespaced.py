@@ -8,7 +8,7 @@ from dify_plugin.errors.model import InvokeError
 from utils.redis_utils import get_redis_connection
 
 
-class RedisGetAction(Tool):
+class RedisGetNamespacedAction(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         name = tool_parameters.get('name')
         key = tool_parameters.get('key')
