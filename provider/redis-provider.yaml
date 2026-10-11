@@ -58,6 +58,7 @@ tools:
   - tools/set.yaml
   - tools/get.yaml
   - tools/del.yaml
+  - tools/exists.yaml
   - tools/set_namespaced.yaml
   - tools/get_namespaced.yaml
 extra:

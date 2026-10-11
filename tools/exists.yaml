@@ -1,0 +1,26 @@
+identity:
+  name: exists
+  author: eft
+  label:
+    en_US: EXISTS
+    zh_Hans: EXISTS
+description:
+  human:
+    en_US: Check whether a Redis key exists
+    zh_Hans: 检查 Redis 键是否存在
+  llm: "Check whether a Redis key exists. The key is used exactly as given, no prefix is added. Returns \"true\" or \"false\"."
+parameters:
+  - name: 'key'
+    type: string
+    required: true
+    label:
+      en_US: 'Key'
+      zh_Hans: 'Key'
+    human_description:
+      en_US: 'The full Redis key'
+      zh_Hans: '完整的 Redis 键'
+    llm_description: "The full Redis key, used as-is."
+    form: llm
+extra:
+  python:
+    source: tools/exists.py

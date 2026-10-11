@@ -4,9 +4,10 @@ import pytest
 
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.model import InvokeError
+from tools.delete import RedisDelAction
+from tools.exists import RedisExistsAction
 from tools.get import RedisGetAction
 from tools.get_namespaced import RedisGetNamespacedAction
-from tools.delete import RedisDelAction
 from tools.set import RedisSetAction
 from tools.set_namespaced import RedisSetNamespacedAction
 
@@ -160,3 +161,30 @@ class TestRedisGetAction:
         assert len(msgs) == 1
         text = getattr(msgs[0].message, 'text', msgs[0].message)
         assert text == ''
+
+
+class TestRedisExistsAction:
+    def test_missing_key_param_raises(self):
+        tool = make_tool(RedisExistsAction)
+        with pytest.raises(InvokeError):
+            list(tool._invoke({'key': ''}))
+
+    def test_existing_key_returns_true(self):
+        tool = make_tool(RedisExistsAction)
+        conn = MagicMock()
+        conn.exists.return_value = 1
+        with patch('tools.exists.get_redis_connection', return_value=conn):
+            msgs = list(tool._invoke({'key': 'k'}))
+        assert len(msgs) == 1
+        conn.exists.assert_called_once_with('k')
+        text = getattr(msgs[0].message, 'text', msgs[0].message)
+        assert text == 'true'
+
+    def test_missing_key_returns_false(self):
+        tool = make_tool(RedisExistsAction)
+        conn = MagicMock()
+        conn.exists.return_value = 0
+        with patch('tools.exists.get_redis_connection', return_value=conn):
+            msgs = list(tool._invoke({'key': 'k'}))
+        text = getattr(msgs[0].message, 'text', msgs[0].message)
+        assert text == 'false'
