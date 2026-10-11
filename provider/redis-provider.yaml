@@ -57,6 +57,7 @@ credentials_for_provider:
 tools:
   - tools/set.yaml
   - tools/get.yaml
+  - tools/del.yaml
   - tools/redis-set.yaml
   - tools/redis-get.yaml
 extra:

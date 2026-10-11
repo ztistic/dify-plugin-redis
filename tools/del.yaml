@@ -1,0 +1,26 @@
+identity:
+  name: del
+  author: eft
+  label:
+    en_US: DEL
+    zh_Hans: DEL
+description:
+  human:
+    en_US: Delete a Redis key
+    zh_Hans: 删除 Redis 键
+  llm: "Delete a Redis key. The key is used exactly as given, no prefix is added. Returns the number of keys deleted (0 or 1)."
+parameters:
+  - name: 'key'
+    type: string
+    required: true
+    label:
+      en_US: 'Key'
+      zh_Hans: 'Key'
+    human_description:
+      en_US: 'The full Redis key to delete'
+      zh_Hans: '要删除的完整 Redis 键'
+    llm_description: "The full Redis key, used as-is."
+    form: llm
+extra:
+  python:
+    source: tools/redis_del.py
