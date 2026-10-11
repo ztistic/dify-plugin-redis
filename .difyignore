@@ -184,6 +184,9 @@ requirements-dev.txt
 dify-plugin
 dify-plugin.exe
 
+# README screenshots (not needed in the package; icon.svg must stay)
+_assets/*.png
+
 # Mac
 .DS_Store
 
