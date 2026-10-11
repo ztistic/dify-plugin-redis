@@ -55,6 +55,7 @@ credentials_for_provider:
       en_US: 'e.g. 0 (not used in cluster mode)'
       zh_Hans: '例如 0（集群模式下不生效）'
 tools:
+  - tools/set.yaml
   - tools/redis-set.yaml
   - tools/redis-get.yaml
 extra:

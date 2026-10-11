@@ -1,0 +1,48 @@
+identity:
+  name: set
+  author: eft
+  label:
+    en_US: SET
+    zh_Hans: SET
+description:
+  human:
+    en_US: Set a Redis key to a value, with optional expiry
+    zh_Hans: 设置 Redis 键值，可选过期时间
+  llm: "Set a Redis key to a value. The key is used exactly as given, no prefix is added. Returns the value on success. For namespaced keys formed as name:key, use SET (namespaced) instead."
+parameters:
+  - name: 'key'
+    type: string
+    required: true
+    label:
+      en_US: 'Key'
+      zh_Hans: 'Key'
+    human_description:
+      en_US: 'The full Redis key'
+      zh_Hans: '完整的 Redis 键'
+    llm_description: "The full Redis key, used as-is."
+    form: llm
+  - name: 'value'
+    type: string
+    required: true
+    label:
+      en_US: 'Value'
+      zh_Hans: 'Value'
+    human_description:
+      en_US: 'The value to store'
+      zh_Hans: '要存储的值'
+    llm_description: "The value to store in Redis."
+    form: llm
+  - name: 'ttl'
+    type: number
+    required: false
+    label:
+      en_US: 'TTL'
+      zh_Hans: 'TTL'
+    human_description:
+      en_US: 'Time-to-live in seconds (no expiry if omitted, -1 for no expiry)'
+      zh_Hans: '过期时间，单位秒（省略或 -1 表示永不过期）'
+    llm_description: "Time-to-live in seconds. Omit or use -1 for no expiry."
+    form: llm
+extra:
+  python:
+    source: tools/set.py

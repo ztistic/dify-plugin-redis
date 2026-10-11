@@ -5,6 +5,7 @@ import pytest
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.errors.model import InvokeError
 from tools.get_namespaced import RedisGetNamespacedAction
+from tools.set import RedisSetAction
 from tools.set_namespaced import RedisSetNamespacedAction
 
 
@@ -53,6 +54,30 @@ class TestRedisSetNamespacedAction:
         with patch('tools.set_namespaced.get_redis_connection', return_value=conn):
             list(tool._invoke({'name': 123, 'key': 456, 'value': 789, 'ttl': -1}))
         conn.set.assert_called_once_with('123:456', '789')
+
+
+class TestRedisSetAction:
+    @pytest.mark.parametrize('params', [{'key': '', 'value': 'v'}, {'key': 'k', 'value': ''}])
+    def test_missing_params_raise(self, params):
+        tool = make_tool(RedisSetAction)
+        with pytest.raises(InvokeError):
+            list(tool._invoke(params))
+
+    def test_default_no_expiry(self):
+        tool = make_tool(RedisSetAction)
+        conn = MagicMock()
+        with patch('tools.set.get_redis_connection', return_value=conn):
+            msgs = list(tool._invoke({'key': 'k', 'value': 'v'}))
+        conn.set.assert_called_once_with('k', 'v', ex=None)
+        text = getattr(msgs[0].message, 'text', msgs[0].message)
+        assert text == 'v'
+
+    def test_ttl_uses_ex(self):
+        tool = make_tool(RedisSetAction)
+        conn = MagicMock()
+        with patch('tools.set.get_redis_connection', return_value=conn):
+            list(tool._invoke({'key': 'k', 'value': 'v', 'ttl': 120}))
+        conn.set.assert_called_once_with('k', 'v', ex=120)
 
 
 class TestRedisGetNamespacedAction:
